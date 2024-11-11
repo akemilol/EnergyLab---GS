@@ -1,9 +1,9 @@
 export default function Header() {
     return (
         <header
-            className="relative w-full h-[70vh] flex flex-col items-center justify-start text-center text-white p-8"
-            style={{ backgroundImage: "url('img/background.png')", backgroundSize: 'contain', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }}>
-
+            className="relative w-full h-[55vh] flex flex-col items-center justify-start text-center text-white p-8"
+            style={{ backgroundImage: "url('img/background.png')", backgroundSize: 'cover', }}
+        >
             <div className="p-6 rounded-lg mt-12">
                 <h1 className="mb-8 text-3xl max-w-2xl font-bold">Lorem impsum</h1>
                 <p className="mb-8 text-2xl max-w-2xl">

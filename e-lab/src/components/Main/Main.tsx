@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { FaCode, FaHourglass, FaUser, FaExclamationTriangle, FaGlobe } from 'react-icons/fa';
+import { FaCode, FaHourglass, FaUser, FaExclamationTriangle, FaGlobe, FaAngleDoubleDown } from 'react-icons/fa';
 
 const BenefitsSection: FC = () => {
   const benefits = [
@@ -26,6 +26,10 @@ const BenefitsSection: FC = () => {
               <p className="text-sm">{benefit.text}</p>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center mt-8">
+          <FaAngleDoubleDown className="text-6xl animate-bounce" />
         </div>
       </div>
     </div>

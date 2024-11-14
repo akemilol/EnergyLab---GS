@@ -1,7 +1,7 @@
 export default function Header() {
     return (
     <header
-        className="w-full h-[70vh] flex flex-col items-center justify-center text-center text-white bg-gradient-header sm:bg-[url('/img/background.png')] sm:bg-cover">
+        className="w-full h-[70vh] flex flex-col items-center justify-center text-center text-white bg-gradient-header sm:bg-[url('/img/background.png')] sm:bg-cover ">
         <div className="p-6 w-full max-w-2xl">
         <h1 className="mb-8 text-3xl font-bold">Lorem impsum</h1>
         <p className="mb-8 text-2xl">

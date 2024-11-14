@@ -15,7 +15,7 @@ export default function NavBar() {
     }
 
     return (
-        <header className="bg-zinc-800 text-violet-500 flex flex-wrap items-center justify-between px-6 py-4">
+        <header className="bg-zinc-800 text-violet-500 flex flex-wrap items-center justify-between px-6 py-4 max-w-[113rem] mx-auto">
             <div className="flex items-center justify-between w-full md:w-auto">
                 <div className="flex items-center text-4xl font-extrabold">
                     <h1>EnergyLab</h1>

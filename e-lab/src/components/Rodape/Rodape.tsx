@@ -1,25 +1,23 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Rodape = () => {
   return (
     <div className="bg-black flex justify-center">
       <footer
-        style={{ maxWidth: '113rem' }}
-        className="bg-gradient-header text-white py-8 px-6 md:px-12 rounded-t-lg border-t-4 border-black w-full flex flex-col items-center space-y-4"
-      >
+        className="bg-gradient-header text-white py-8 px-6 md:px-12 rounded-t-lg border-t-4 border-black w-full flex flex-col items-center space-y-4 max-w-[113rem] mx-auto">
 
         <nav className="flex space-x-8">
-          <a href="#" className="hover:underline">
+          <Link href="#" className="hover:underline">
             Home
-          </a>
-          <a href="#" className="hover:underline">
+          </Link>
+          <Link href="#" className="hover:underline">
             FAQs
-          </a>
-          <a href="#" className="hover:underline">
+          </Link>
+          <Link href="#" className="hover:underline">
             Sobre nós
-          </a>
+          </Link>
         </nav>
-
 
         <p className="text-sm text-center mt-4">
           © Todos os direitos reservados, Equipe EnergyLab.

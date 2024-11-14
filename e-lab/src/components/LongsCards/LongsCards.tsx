@@ -2,11 +2,11 @@ import { FaAngleDoubleDown } from 'react-icons/fa';
 
 const LongsCards = () => {
     const titulos = [
-        "Introdução ao Lorem Ipsum",
-        "Introdução ao Lorem Ipsum",
-        "Introdução ao Lorem Ipsum",
-        "Introdução ao Lorem Ipsum",
-        "Introdução ao Lorem Ipsum"
+        "Introdução ao Lorem",
+        "Introdução ao Lorem",
+        "Introdução ao Lorem",
+        "Introdução ao Lorem",
+        "Introdução ao Lorem"
 ];
 
 const paragrafos = [

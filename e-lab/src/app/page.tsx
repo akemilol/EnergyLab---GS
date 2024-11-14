@@ -3,6 +3,7 @@ import Header from "@/components/Header/Header";
 import Main from "@/components/Main/Main";
 import LongsCards from "@/components/LongsCards/LongsCards";
 import CardUni from "@/components/CardUni/CardUni";
+import MenuFaqs from "@/components/MenuFaqs/MenuFaqs";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
         <Main />
         <LongsCards />
         <CardUni />
+        <MenuFaqs />
     </>
   );
 }

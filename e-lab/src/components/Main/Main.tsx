@@ -11,7 +11,8 @@ const BenefitsSection: FC = () => {
   ];
 
   return (
-    <div className="text-white py-10 px-6">
+    <div className="text-white py-10 px-6 max-w-[113rem] mx-auto">
+    <div className="max-w-[113rem] mx-auto">
       <div className="container mx-auto">
         <h2 className="text-3xl font-bold mb-6">Benefícios:</h2>
         <div className="flex flex-col md:flex-row md:justify-between md:space-x-4 space-y-4 md:space-y-0">
@@ -32,6 +33,7 @@ const BenefitsSection: FC = () => {
           <FaAngleDoubleDown className="text-6xl animate-bounce" />
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -33,8 +33,9 @@ const paragrafos = [
 ];
 
     return (
-        <div className="bg-black text-white p-10 min-h-screen flex flex-col justify-center">
-        <h1 className="text-3xl font-semibold text-purple-400 mb-8 text-center">Lorem Ipsum</h1>
+        <div className="bg-black text-white p-10 min-h-screen flex flex-col justify-center ">
+        <div className="max-w-[113rem] mx-auto">
+        <h1 className="text-3xl font-semibold text-purple-400 mb-8 text-center">Lorem Ipsum </h1>
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 w-full mt-20">
             {paragrafos.map((paragrafo, index) => (
             <div
@@ -55,6 +56,7 @@ const paragrafos = [
         </div>
         <div className="flex justify-center mt-16">
             <FaAngleDoubleDown className="text-6xl animate-bounce" />
+        </div>
         </div>
         </div>
     );

@@ -15,4 +15,4 @@ export const metadata = {
         <body>{children}</body>
         </html>
     );
-  }
+}

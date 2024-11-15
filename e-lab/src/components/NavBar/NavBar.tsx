@@ -39,7 +39,7 @@ export default function NavBar() {
                         {menuOpen ? <FiHelpCircle /> : <FaChevronDown />}
                     </li>
                     <li className="group relative flex items-center space-x-2">
-                        <Link href="/" className="text-lg hover:text-violet-400">Sobre Nós</Link>
+                        <Link href="/sobrenos" className="text-lg hover:text-violet-400">Sobre Nós</Link>
                         {menuOpen ? <FiUsers /> : <FaChevronDown />}
                     </li>
                 </ul>

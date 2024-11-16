@@ -1,5 +1,6 @@
 import NavBar from "@/components/NavBar/NavBar";
 import CardAbout from "@/components/CardAbout/CardAbout"
+import FigmaBotão from "@/components/FigmaBotao/FigmaBotao";
 
 export default function Sobrenos() {
     return (
@@ -12,7 +13,7 @@ export default function Sobrenos() {
         
         <CardAbout />
 
-
+        <FigmaBotão />
         </div>
     );
 };

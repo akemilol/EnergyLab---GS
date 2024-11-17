@@ -35,7 +35,7 @@ export default function NavBar() {
                         {menuOpen ? <FiBox /> : <FaChevronDown />}
                     </li>
                     <li className="group relative flex items-center space-x-2">
-                        <Link href="/" className="text-lg hover:text-violet-400">FAQs</Link>
+                        <Link href="/faqs" className="text-lg hover:text-violet-400">FAQs</Link>
                         {menuOpen ? <FiHelpCircle /> : <FaChevronDown />}
                     </li>
                     <li className="group relative flex items-center space-x-2">
@@ -46,12 +46,15 @@ export default function NavBar() {
             </nav>
 
             <div className={`w-full md:flex md:items-center md:w-auto ${menuOpen ? 'block text-center' : 'hidden'} md:block mt-4 md:mt-0`}>                
-                <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
-                    <button className="text-xl text-violet-500 font-bold hover:text-violet-400">Login</button>
-                    <button className="bg-violet-500 text-white font-bold text-xl py-2 px-4 rounded hover:bg-violet-700">Cadastre-se</button>
-                </div>
+            <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+            <Link href="/login">
+                    <button className="text-xl text-violet-500 font-bold hover:text-violet-400 py-2 px-4 rounded md:inline-block">Login</button>
+                </Link>
+                <Link href="/cadastro">
+                    <button className="bg-violet-500 text-white font-bold text-xl py-2 px-4 rounded hover:bg-violet-700 md:inline-block">Cadastre-se</button>
+                </Link>
             </div>
+        </div>
         </header>
     );
 }
-

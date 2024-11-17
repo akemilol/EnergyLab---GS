@@ -1,6 +1,9 @@
+'use client'
+
 import Image from 'next/image';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
+// Interface para tipar as propriedades do CardAbout.
 interface CardAboutProps {
   nome: string;
   sobrenome: string;
@@ -13,8 +16,10 @@ interface CardAboutProps {
   linkedin: string;
 }
 
+// Componente com informações do membro.
 const CardAbout: React.FC<CardAboutProps> = ({
-  nome, sobrenome,
+  nome,
+  sobrenome,
   turma,
   rm,
   textosobre,
@@ -23,89 +28,113 @@ const CardAbout: React.FC<CardAboutProps> = ({
   github,
   linkedin,
 }) => {
+  
+  // links dos cards
+  const handleOpenLink = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const textoNegrito = "Responsável pelas matérias de:";
+
   return (
-    <div className="bg-gray-300 text-indigo-900 rounded-lg p-6 shadow-lg w-72 relative">
-      <div className="relative w-full h-32 mb-8 rounded-t-lg overflow-hidden">
+    <div className="bg-stone-100 text-indigo-950 rounded-lg p-6 shadow-lg w-80 relative transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+
+      <div className="relative w-full h-44 mb-16 rounded-t-lg overflow-hidden">
         <Image
           src={imagemCapa}
           alt={`Imagem de ${nome} ${sobrenome}`}
           layout="fill"
           objectFit="cover"
+          className="transition-transform duration-300 hover:scale-110"
         />
       </div>
-      <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-24 h-24 mb-4 overflow-hidden rounded-lg">
+
+      <div className="absolute top-32 left-1/2 transform -translate-x-1/2 w-32 h-32 mb-4 overflow-hidden rounded-lg">
         <Image
           src={imagem}
           alt={`Imagem de ${nome} ${sobrenome}`}
           layout="fill"
           objectFit="cover"
+          className="transition-transform duration-300 hover:scale-110"
         />
       </div>
-      <div className="mt-12 text-center">
-        <h3 className="text-xl font-bold mb-1">{nome}</h3>
-        <h4 className="text-lg font-semibold  mb-2">{sobrenome}</h4>
-        <p className="text-sm font-semibold text-indigo-900">Turma: {turma}</p>
-        <p className="text-sm font-semibold text-indigo-900">RM: {rm}</p>
-        <p className="mt-4 mb-4 font-medium">{textosobre}</p>
-        <div className="flex justify-center gap-4 mt-4">
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-indigo-900 hover:text-gray-400"
-          >
-            <FaGithub size={24} />
-          </a>
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-indigo-900 hover:text-gray-400"
-          >
-            <FaLinkedin size={24} />
-          </a>
+
+      <div className="mt-0 text-center">
+        <div className="mt-4">
+          <h3 className="text-2xl font-bold mb-0">{nome}</h3>
+          <h4 className="text-xl font-semibold mb-4">{sobrenome}</h4>
         </div>
+
+        <p className="text-sm font-semibold text-indigo-900">Turma: {turma}</p>
+        <p className="text-sm font-semibold text-indigo-900 mb-4">RM: {rm}</p>
+
+        <div className="flex justify-center gap-6 mb-4">
+          <button
+            onClick={() => handleOpenLink(github)}
+            className="hover:text-gray-400 transition-transform duration-300 hover:scale-110"
+            style={{ color: '#181717' }}
+          >
+            <FaGithub size={32} />
+          </button>
+          <button
+            onClick={() => handleOpenLink(linkedin)}
+            className="hover:text-gray-400 transition-transform duration-300 hover:scale-110"
+            style={{ color: '#0077B5' }}
+          >
+            <FaLinkedin size={32} />
+          </button>
+        </div>
+
+
+        <p className="font-medium">
+          <span className="font-bold">{textoNegrito}</span> {textosobre.replace(`${textoNegrito} `, '')}
+        </p>
       </div>
     </div>
   );
 };
 
+// Array de dados dos membros da equipe.
 const equipeMembros = [
   {
     nome: "Valéria",
     sobrenome: "Conceição Dos Santos",
     turma: "1TDSPM",
     rm: "55177",
-    textosobre: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
+    textosobre:
+      "Responsável pelas matérias de: Software engineering and business model e Front-end design engineering",
     imagem: "/img/valeria.jpg",
-    imagemCapa: "/img/capa.jpg",
-    github: "",
-    linkedin: ""
+    imagemCapa: "/img/capa1.jpeg",
+    github: "https://github.com/akemilol",
+    linkedin: "https://www.linkedin.com/in/val%C3%A9riasantos/",
   },
   {
     nome: "Mirela",
     sobrenome: "Pinheiro Silva Rodrigues",
     turma: "1TDSPM",
     rm: "558191",
-    textosobre: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-    imagem: "/img/mirela.jpg",
-    imagemCapa: "",
-    github: "",
-    linkedin: ""
+    textosobre:
+      "Responsável pelas matérias de: Artificial Intelligence & Chatbot e Building Relational Database",
+    imagem: "/img/mirela.jpeg",
+    imagemCapa: "/img/capa2.jpeg",
+    github: "https://github.com/mirelapsr",
+    linkedin: "https://www.linkedin.com/in/mirela-p-s-rodrigues-26344b2b6/",
   },
   {
     nome: "João",
     sobrenome: "Amorim Brito Virgens",
     turma: "1TDSPV",
     rm: "559213",
-    textosobre: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",
-    imagem: "/img/joao.jpg",
-    imagemCapa: "",
-    github: "",
-    linkedin: ""
+    textosobre:
+      "Responsável pelas matérias de: Domain Driven Design Using Java e Computational Thinking Using Python",
+    imagem: "/img/joao.jpeg",
+    imagemCapa: "/img/capa3.jpeg",
+    github: "https://github.com/JPAmorimBV",
+    linkedin: "https://www.linkedin.com/in/joao-pedro-amorim-557472227/",
   },
 ];
 
+// Renderiza os cartões dos membros da equipe.
 const SobreNos: React.FC = () => {
   return (
     <div className="flex gap-8 justify-center items-center flex-wrap p-8">

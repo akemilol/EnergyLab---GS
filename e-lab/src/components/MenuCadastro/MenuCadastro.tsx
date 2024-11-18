@@ -63,7 +63,7 @@ export default function MenuCadastro() {
 
     const handleCadastro = () => {
         if (validarFormulario()) {
-            // Cadastro concluído, nenhuma mensagem será exibida
+            window.location.href = '/formulario';
         }
     };
 

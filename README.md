@@ -13,7 +13,7 @@
 ---
 
 ### 🎥 Pitch
-- [Acesso ao Pitch 1]()  
+- [Acesso ao Pitch]()  
 
 ---
 

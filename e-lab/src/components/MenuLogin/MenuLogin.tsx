@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 export default function MenuLogin() {
@@ -9,6 +10,8 @@ export default function MenuLogin() {
     const [senha, setSenha] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const router = useRouter(); 
 
     // Valida o formato do email
     const validateEmail = (email: string) => {
@@ -36,6 +39,7 @@ export default function MenuLogin() {
 
         setTimeout(() => {
             setLoading(false);
+            router.push('/formulario'); 
         }, 2000);
     };
 
@@ -102,7 +106,7 @@ export default function MenuLogin() {
                 </div>
 
                 {/* Imagem decorativa */}
-                <div className="absolute lg:relative right-0 lg:right-16 bottom-0 z-10 hidden md:block lg:block">
+                <div className="absolute lg:relative right=0 lg:right-16 bottom-0 z-10 hidden md:block lg:block">
                     <div className="relative">
                         <Image
                             src="/img/LoginComputer.svg"

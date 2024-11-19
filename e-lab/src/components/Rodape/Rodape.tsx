@@ -14,7 +14,7 @@ const Rodape = () => {
           <Link href="#" className="hover:underline">
             FAQs
           </Link>
-          <Link href="#" className="hover:underline">
+          <Link href="sobrenos" className="hover:underline">
             Sobre nós
           </Link>
         </nav>

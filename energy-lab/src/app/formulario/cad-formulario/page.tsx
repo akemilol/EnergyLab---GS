@@ -149,7 +149,6 @@ export default function FormularioEnergia() {
             </div>
           </div>
 
- 
           <div>
             <label className="flex items-center gap-2 text-white text-base mb-2">
               <FiMapPin className="text-purple-500" /> Em qual região do país você mora?

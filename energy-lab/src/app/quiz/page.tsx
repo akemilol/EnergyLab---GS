@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-
 // Pagina inicial do Quiz
 const Quiz: React.FC = () => {
   return (
@@ -13,9 +12,16 @@ const Quiz: React.FC = () => {
       <p className="text-lg text-gray-300 mb-8">
         Teste seus conhecimentos sobre energia renovável!
       </p>
+      
       <Link href="/quiz/1">
-        <button className="px-8 py-3 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300 ease-in-out shadow-md">
+        <button className="w-full max-w-md px-8 py-3 text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition duration-300 ease-in-out shadow-md mb-4">
           Iniciar Quiz
+        </button>
+      </Link>
+
+      <Link href="/">
+        <button className="w-full max-w-md px-8 py-3 text-white bg-gray-600 rounded-lg hover:bg-gray-700 transition duration-300 ease-in-out shadow-md mb-4">
+          Voltar
         </button>
       </Link>
     </div>

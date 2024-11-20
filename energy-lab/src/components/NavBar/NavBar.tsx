@@ -31,7 +31,7 @@ export default function NavBar() {
             <nav className={`w-full md:flex md:items-center md:w-auto ${menuOpen ? 'block' : 'hidden'}`}>
                 <ul className={` text-white flex flex-col items-center md:flex-row md:space-x-8 space-y-4 md:space-y-0 mt-4 md:mt-0 ${menuOpen ? 'text-center' : ''}`}>
                     <li className="group relative flex items-center space-x-2">
-                        <Link href="/" className="text-lg hover:text-violet-400">Home</Link>
+                        <Link href="/quiz" className="text-lg hover:text-violet-400">Quiz</Link>
                         {menuOpen ? <FiBox /> : <FaChevronDown />}
                     </li>
                     <li className="group relative flex items-center space-x-2">

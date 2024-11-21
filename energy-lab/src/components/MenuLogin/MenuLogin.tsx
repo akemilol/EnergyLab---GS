@@ -92,7 +92,7 @@ export default function MenuLogin() {
 
                     <div className="mt-4 sm:mt-6 mb-6 sm:mb-8 text-sm sm:text-base text-center">
                         <span className="text-gray-400">Não tem conta? </span>
-                        <span className="text-purple-500 hover:underline cursor-pointer" onClick={() => window.location.href = '#'}>Acesse aqui</span>
+                        <span className="text-purple-500 hover:underline cursor-pointer" onClick={() => window.location.href = '/cadastro'}>Acesse aqui</span>
                     </div>
 
                     {/* Botão de login */}

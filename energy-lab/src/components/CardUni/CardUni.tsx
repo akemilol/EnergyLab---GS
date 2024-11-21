@@ -1,5 +1,8 @@
 import Image from 'next/image';
 
+
+// Página de Card Único na Landing page
+
 const CardUni = () => {
 return (
     <div className="flex flex-col items-center justify-center bg-black">

@@ -3,11 +3,11 @@ import { FaCode, FaHourglass, FaUser, FaExclamationTriangle, FaGlobe, FaAngleDou
 
 const Beneficios: FC = () => {
   const textos = [
-    { icon: <FaCode />, text: 'Lorem Ipsum is simply dummy text' },
-    { icon: <FaHourglass />, text: 'Lorem Ipsum is simply dummy text' },
-    { icon: <FaUser />, text: 'Lorem Ipsum is simply dummy text' },
-    { icon: <FaExclamationTriangle />, text: 'Lorem Ipsum is simply dummy text' },
-    { icon: <FaGlobe />, text: 'Lorem Ipsum is simply dummy text' },
+    { icon: <FaCode />, text: 'Ferramentas básicas para começar a gerenciar seu consumo.' },
+    { icon: <FaHourglass />, text: 'Gráficos detalhados e análises personalizadas' },
+    { icon: <FaUser />, text: 'Soluções completas para pequenas empresas' },
+    { icon: <FaExclamationTriangle />, text: 'Funcionalidades customizadas sob consulta para grandes negócios' },
+    { icon: <FaGlobe />, text: 'Invista em sustentabilidade e eficiência energética hoje mesmo!' },
   ];
 
   return (

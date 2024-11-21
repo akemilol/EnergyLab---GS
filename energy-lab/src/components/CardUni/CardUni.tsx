@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 
 const CardUni = () => {
@@ -17,10 +16,7 @@ return (
         
 
         <p className="text-lg" style={{ marginTop: '4.5rem' }}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-        industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-        it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-        typesetting, remaining essentially unchanged.
+        A transição energética é o processo de substituição de fontes de energia convencionais, como combustíveis fósseis, por fontes renováveis e mais limpas, como solar e eólica, promovendo uma mudança na matriz energética global para reduzir emissões e dependência de recursos finitos. Já a eficiência energética está focada em otimizar o uso da energia disponível, garantindo o mesmo desempenho com menor consumo, por meio de tecnologias, equipamentos eficientes e comportamentos conscientes. Enquanto a transição energética visa transformar as fontes de geração, a eficiência energética reduz o consumo e evita desperdícios, sendo ambos complementares na busca por um futuro mais sustentável.
         </p>
     </div>
 

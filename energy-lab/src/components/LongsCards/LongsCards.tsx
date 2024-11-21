@@ -2,40 +2,40 @@ import { FaAngleDoubleDown } from 'react-icons/fa';
 
 const LongsCards = () => {
     const titulos = [
-        "Introdução ao Lorem",
-        "Introdução ao Lorem",
-        "Introdução ao Lorem",
-        "Introdução ao Lorem",
-        "Introdução ao Lorem"
+        "Economia de Energia",
+        "Sustentabilidade",
+        "Interface Intuitiva",
+        "Planejamento Preciso",
+        "Monitoramento"
 ];
 
 const paragrafos = [
     [
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text for years.",
-        "The quick brown fox jumps over the lazy dog. This sentence contains all the letters in the English language."
+        "Descubra oportunidades de economia no seu consumo de energia com nossa análise detalhada. Identifique desperdícios e implemente ações para reduzir custos e otimizar seus recursos energéticos.",
+        "Com insights claros e objetivos, você pode tomar decisões estratégicas para melhorar a eficiência energética da sua casa ou empresa, gerando impacto positivo no seu orçamento."
     ],
     [
-        "React is a JavaScript library for building user interfaces. It is maintained by Facebook and a community of individual developers and companies.",
-        "Tailwind CSS is a utility-first CSS framework that can be used to rapidly build modern websites without writing custom CSS."
+        "Contribua para um futuro mais sustentável! Calculamos suas emissões de carbono com base no consumo e apresenta sugestões práticas para minimizar o impacto ambiental.",
+        "Cada mudança recomendada pela plataforma ajuda a preservar recursos naturais e promove práticas sustentáveis no seu dia a dia, fortalecendo sua consciência ambiental."
     ],
     [
-        "Next.js is a React framework that enables server-side rendering and static website generation for creating optimized web applications.",
-        "JavaScript is a versatile programming language primarily used for web development, both on the client and server sides."
+        "Fomos projetada para ser prático e fácil de usar. Com uma interface clara, nossos gráficos interativos tornam os dados energéticos acessíveis e compreensíveis para todos.",
+        "Mesmo informações complexas são transformadas em insights visuais, permitindo que você entenda e gerencie seu consumo com poucos cliques, sem complicações técnicas."
     ],
     [
-        "TypeScript extends JavaScript by adding types, enabling developers to write more reliable and maintainable code.",
-        "HTML and CSS are foundational technologies for building web pages: HTML for structure and CSS for styling."
+        "Podemos prever e planejar o consumo de energia com base em dados confiáveis. Nossa plataforma oferece insights que ajudam a otimizar o uso de recursos e evitar desperdícios.",
+        "Tenha uma visão clara do seu consumo histórico e estimativas futuras. Use essas informações para definir metas, criar estratégias e alcançar maior eficiência energética no seu dia a dia."
     ],
     [
-        "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine, allowing developers to use JavaScript for server-side programming.",
-        "Git is a distributed version control system that helps developers track changes in their codebase and collaborate with others."
+        "Mantenha o controle do seu progresso com o monitoramento contínuo. Veja o impacto das ações realizadas e acompanhe melhorias no consumo.",
+        "Receba notificações automáticas sobre consumo fora do padrão ou novas oportunidades de economia, garantindo que você nunca perca de vista seus objetivos energéticos."
     ]
 ];
 
     return (
         <div className="bg-black text-white p-10 min-h-screen flex flex-col justify-center ">
         <div className="max-w-[113rem] mx-auto">
-        <h1 className="text-3xl font-semibold text-purple-400 mb-8 text-center">Lorem Ipsum </h1>
+        <h1 className="text-3xl font-semibold text-purple-400 mb-8 text-center"> Vantagens que Transformam seu Consumo Energético </h1>
         <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 w-full mt-20">
             {paragrafos.map((paragrafo, index) => (
             <div

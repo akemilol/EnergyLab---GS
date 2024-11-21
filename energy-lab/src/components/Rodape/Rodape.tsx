@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 
 const Rodape = () => {
@@ -11,8 +10,8 @@ const Rodape = () => {
           <Link href="#" className="hover:underline">
             Home
           </Link>
-          <Link href="#" className="hover:underline">
-            FAQs
+          <Link href="/quiz" className="hover:underline">
+            Quiz
           </Link>
           <Link href="sobrenos" className="hover:underline">
             Sobre nós

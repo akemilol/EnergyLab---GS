@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+// Página do Rodapé
+
 const Rodape = () => {
   return (
     <div className="bg-black flex justify-center">

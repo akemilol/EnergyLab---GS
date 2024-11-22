@@ -2,17 +2,20 @@ import './globals.css';
 
 export const metadata = {
     title: 'EnergyLab',
-    description: '',
-    };
+    description: 'EnergyLab solução de dashboard',
+};
 
-    export default function RootLayout({
+export default function RootLayout({
     children,
-    }: {
+}: {
     children: React.ReactNode;
-    }) {
+}) {
     return (
         <html lang="pt-br">
-        <body>{children}</body>
+            <head>
+                <link rel="icon" href="/img/icone.png" />
+            </head>
+            <body>{children}</body>
         </html>
     );
 }

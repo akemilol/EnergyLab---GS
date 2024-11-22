@@ -32,7 +32,9 @@ interface ApiResponse<T = unknown> {
     statusCode: number;
 }
 
+// Componente principal
 export default function MenuCadastro() {
+    // Estados do formulário
     const [nome, setNome] = useState<string>('');
     const [dataNascimento, setDataNascimento] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -44,7 +46,9 @@ export default function MenuCadastro() {
     const [loading, setLoading] = useState<boolean>(false);
     const [success, setSuccess] = useState<boolean>(false);
 
+    // Valida a data de nascimento
     const validarData = (data: string): boolean => {
+        // Expressão regular para verificar o formato da data
         if (!data || !/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
             return false;
         }
@@ -55,6 +59,7 @@ export default function MenuCadastro() {
             return false;
         }
 
+        // Criação do objeto de data
         const dataObj = new Date(ano, mes - 1, dia);
         const hoje = new Date();
         hoje.setHours(0, 0, 0, 0);
@@ -72,46 +77,56 @@ export default function MenuCadastro() {
         );
     };
 
+    // Formata a data para a API
     const formatarDataParaAPI = (data: string): string => {
+        // Verifica se a data está no formato correto antes de formatar
         if (!data || !/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
             throw new Error('Data inválida');
         }
         return data.replace(/\//g, '-');
     };
 
+    // Valida os campos do formulário
     const validarFormulario = (): boolean => {
         const novosErros: Erros = {};
 
+        // Validação do nome
         if (!nome.trim()) {
             novosErros.nome = 'Por favor, preencha o nome completo.';
         }
 
+        // Validação da data de nascimento
         if (!dataNascimento.trim()) {
             novosErros.dataNascimento = 'Por favor, preencha a data de nascimento.';
         } else if (!validarData(dataNascimento)) {
             novosErros.dataNascimento = 'Por favor, insira uma data de nascimento válida no formato dd/mm/aaaa.';
         }
 
+        // Validação do email
         if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             novosErros.email = 'Por favor, preencha um email válido.';
         }
 
+        // Validação do telefone
         if (!telefone.trim() || !/^\(\d{2}\) \d{5}-\d{4}$/.test(telefone)) {
             novosErros.telefone = 'Por favor, preencha o número de telefone no formato correto ((00) 00000-0000).';
         }
 
+        // Validação da senha
         if (!senha.trim()) {
             novosErros.senha = 'Por favor, preencha a senha.';
         } else if (senha.length < 6) {
             novosErros.senha = 'A senha deve ter no mínimo 6 dígitos.';
         }
 
+        // Validação da confirmação de senha
         if (!confirmarSenha.trim()) {
             novosErros.confirmarSenha = 'Por favor, confirme a senha.';
         } else if (senha !== confirmarSenha) {
             novosErros.confirmarSenha = 'As senhas não coincidem. Por favor, verifique.';
         }
 
+        // Validação do gênero
         if (!genero) {
             novosErros.genero = 'Por favor, selecione o gênero.';
         }
@@ -120,13 +135,16 @@ export default function MenuCadastro() {
         return Object.keys(novosErros).length === 0;
     };
 
+    // Lida com a mudança de valor no campo data de nascimento
     const handleDataNascimentoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = e.target.value.replace(/\D/g, '');
 
+        // Limita o tamanho da string a 8 caracteres (ddmmaaaa)
         if (value.length > 8) {
             value = value.slice(0, 8);
         }
 
+        // Formata a data conforme o usuário digita
         if (value.length >= 2) {
             value = value.slice(0, 2) + (value.length > 2 ? '/' + value.slice(2) : '');
         }
@@ -137,14 +155,17 @@ export default function MenuCadastro() {
         setDataNascimento(value);
     };
 
+    // Lida com a mudança de valor no campo telefone
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/\D/g, '');
         let formattedValue = value;
 
+        // Limita o tamanho do telefone a 11 dígitos
         if (value.length > 11) {
             formattedValue = value.slice(0, 11);
         }
 
+        // Formata o telefone conforme o usuário digita
         if (value.length > 2) {
             formattedValue = `(${value.slice(0, 2)})${value.length > 2 ? ' ' + value.slice(2) : ''}`;
         }
@@ -155,6 +176,7 @@ export default function MenuCadastro() {
         setTelefone(formattedValue);
     };
 
+    // Lida com o envio do formulário de cadastro
     const handleCadastro = async () => {
         if (validarFormulario()) {
             setLoading(true);
@@ -171,6 +193,7 @@ export default function MenuCadastro() {
                     return;
                 }
 
+                // Criação do objeto de dados para enviar para a API
                 const dadosCadastro: CadastroUsuario = {
                     nomeCompleto: nome.trim(),
                     dataNascimento: dataFormatada,
@@ -181,6 +204,7 @@ export default function MenuCadastro() {
                     genero: genero.charAt(0).toUpperCase() + genero.slice(1).toLowerCase(),
                 };
 
+                // Envio dos dados para a API
                 const response: ApiResponse = await cadastrarUsuario(dadosCadastro);
                 
                 switch (response.statusCode) {
@@ -223,6 +247,7 @@ export default function MenuCadastro() {
                 }
 
             } catch {
+                // Tratamento de erro de conexão
                 if (!navigator.onLine) {
                     setErros({
                         ...erros,

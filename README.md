@@ -47,7 +47,7 @@
 ---
 
 ### 🔑 Acesso ao Figma do Projeto
-- [Acesso ao prototipo]() 
+- [Acesso ao prototipo](https://www.figma.com/design/a7L7lumVQDi9Nm2wByIBKz/EnergyLab?node-id=1-2&t=LDuOjufsuskx0eMN-1) 
 
 ---
 

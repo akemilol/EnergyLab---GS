@@ -15,14 +15,54 @@ interface LoginUsuario {
     senha: string;
 }
 
-interface ApiResponse {
+interface ApiResponse<T = any> {
+    data?: T;
     message?: string;
     error?: string;
+    statusCode: number;
 }
 
-export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<Response> => {
+class ApiError extends Error {
+    constructor(
+        public statusCode: number,
+        message: string
+    ) {
+        super(message);
+        this.name = 'ApiError';
+    }
+}
+
+const handleApiResponse = async <T>(response: Response): Promise<ApiResponse<T>> => {
+    const contentType = response.headers.get('content-type');
+    const isJson = contentType?.includes('application/json');
+
+    if (!response.ok) {
+        const errorMessage = isJson 
+            ? (await response.json()).message 
+            : await response.text();
+
+        throw new ApiError(response.status, errorMessage);
+    }
+
+    if (isJson) {
+        const data = await response.json();
+        return {
+            data,
+            statusCode: response.status,
+            message: 'Operação realizada com sucesso'
+        };
+    }
+
+    return {
+        statusCode: response.status,
+        message: 'Operação realizada com sucesso'
+    };
+};
+
+// Cadastra um novo usuário
+export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<ApiResponse> => {
     try {
-        const response = await fetch("http://localhost:8080/WebProjetoEnergyLab/api/usuarios/cadastro", {
+        const response = await fetch("/api/cadastrar", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -30,22 +70,26 @@ export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<
             body: JSON.stringify(dadosCadastro),
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
-
-        return response;
+        return handleApiResponse(response);
         
     } catch (error) {
-        console.error("Erro ao cadastrar usuário:", error instanceof Error ? error.message : 'Erro desconhecido');
-        throw error;
+        if (error instanceof ApiError) {
+            return {
+                error: error.message,
+                statusCode: error.statusCode
+            };
+        }
+        return {
+            error: 'Erro interno do servidor',
+            statusCode: 500
+        };
     }
 };
 
+// Realiza login do usuário
 export const loginUsuario = async (dadosLogin: LoginUsuario): Promise<ApiResponse> => {
     try {
-        const response = await fetch("http://localhost:8080/WebProjetoEnergyLab/api/usuarios/login", {
+        const response = await fetch("/api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -53,85 +97,100 @@ export const loginUsuario = async (dadosLogin: LoginUsuario): Promise<ApiRespons
             body: JSON.stringify(dadosLogin),
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || 'Erro ao fazer login');
-        }
-
-        return response.json();
+        return handleApiResponse(response);
         
     } catch (error) {
-        console.error("Erro ao fazer login:", error instanceof Error ? error.message : 'Erro desconhecido');
-        throw error;
+        if (error instanceof ApiError) {
+            return {
+                error: error.message,
+                statusCode: error.statusCode || 401
+            };
+        }
+        return {
+            error: 'Falha na autenticação',
+            statusCode: 401
+        };
     }
 };
 
-// Função para atualizar usuário
-export const atualizarUsuario = async (email: string, dadosUsuario: Partial<CadastroUsuario>): Promise<Response> => {
+// Atualiza dados do usuário
+export const atualizarUsuario = async (email: string, dadosUsuario: Partial<CadastroUsuario>): Promise<ApiResponse> => {
     try {
-        const response = await fetch(`http://localhost:8080/WebProjetoEnergyLab/api/usuarios/${email}`, {
+        const response = await fetch(`/api/usuarios/${email}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(dadosUsuario),
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
-
-        return response;
+        return handleApiResponse(response);
         
     } catch (error) {
-        console.error("Erro ao atualizar usuário:", error instanceof Error ? error.message : 'Erro desconhecido');
-        throw error;
+        if (error instanceof ApiError) {
+            return {
+                error: error.message,
+                statusCode: error.statusCode
+            };
+        }
+        return {
+            error: 'Erro ao atualizar usuário',
+            statusCode: 500
+        };
     }
 };
 
-// Função para deletar usuário
-export const deletarUsuario = async (email: string): Promise<Response> => {
+// Deleta um usuário pelo email
+export const deletarUsuario = async (email: string): Promise<ApiResponse> => {
     try {
-        const response = await fetch(`http://localhost:8080/WebProjetoEnergyLab/api/usuarios/${email}`, {
+        const response = await fetch(`/api/usuarios/${email}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
-
-        return response;
+        return handleApiResponse(response);
         
     } catch (error) {
-        console.error("Erro ao deletar usuário:", error instanceof Error ? error.message : 'Erro desconhecido');
-        throw error;
+        if (error instanceof ApiError) {
+            return {
+                error: error.message,
+                statusCode: error.statusCode
+            };
+        }
+        return {
+            error: 'Erro ao deletar usuário',
+            statusCode: 500
+        };
     }
 };
 
-// Função para buscar usuário por email (exemplo de GET)
+// Busca um usuário pelo email
 export const buscarUsuarioPorEmail = async (email: string): Promise<ApiResponse> => {
     try {
-        const response = await fetch(`http://localhost:8080/WebProjetoEnergyLab/api/usuarios/${email}`, {
+        const response = await fetch(`/api/usuarios/${email}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem('token')}`
             },
         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
-
-        return response.json();
+        return handleApiResponse(response);
         
     } catch (error) {
-        console.error("Erro ao buscar usuário:", error instanceof Error ? error.message : 'Erro desconhecido');
-        throw error;
+        if (error instanceof ApiError) {
+            return {
+                error: error.message,
+                statusCode: error.statusCode
+            };
+        }
+        return {
+            error: 'Erro ao buscar usuário',
+            statusCode: 500
+        };
     }
 };

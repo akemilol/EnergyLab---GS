@@ -1,5 +1,6 @@
 import { FaAngleDoubleDown } from 'react-icons/fa';
 
+// Pagina de Cards na Landing Page
 const LongsCards = () => {
     const titulos = [
         "Economia de Energia",

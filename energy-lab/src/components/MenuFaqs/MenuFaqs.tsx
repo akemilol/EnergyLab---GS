@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const MenuFaqs = () => {
 return (
-    <div className="w-full bg-black p-10 text-white">
+    <div id="faqs" className="w-full bg-black p-10 text-white">
     <div className="mt-20">
     <div className="flex flex-col lg:flex-row gap-8 max-w-[113rem] mx-auto">
 

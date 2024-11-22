@@ -6,6 +6,7 @@ import { AiOutlineHome } from "react-icons/ai";
 const BotaoHome = () => {
 const router = useRouter();
 
+// Um icone de Botão para direcionar o usuario para Home
 return (
     <button
     onClick={() => router.push("/")} 

@@ -10,6 +10,7 @@ const Beneficios: FC = () => {
     { icon: <FaGlobe />, text: 'Invista em sustentabilidade e eficiência energética hoje mesmo!' },
   ];
 
+  // Pagina de icone com textos em Landing Page
   return (
     <div className="max-w-full md:max-w-[80rem] lg:max-w-[113rem] mx-auto text-white py-10 px-6">
       <h2 className="text-3xl font-bold mb-6">Benefícios:</h2>

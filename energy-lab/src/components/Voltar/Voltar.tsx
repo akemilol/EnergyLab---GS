@@ -2,7 +2,7 @@
 
 import { FaHome } from 'react-icons/fa';
 
-// Botão de voltar ao inicio.
+// Botão de voltar ao inicio mais longo
 export default function Voltar() {
     return (
     <div className="fixed bottom-4 left-4">

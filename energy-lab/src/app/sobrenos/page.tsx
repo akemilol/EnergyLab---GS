@@ -3,6 +3,7 @@ import CardAbout from "@/components/CardAbout/CardAbout"
 import FigmaBotão from "@/components/FigmaBotao/FigmaBotao";
 import BotaoHome from "@/components/BotaoHome/BotaoHome";
 
+// Pagina de sobrenos
 export default function Sobrenos() {
     return (
         <div>

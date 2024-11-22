@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Chart, registerables } from 'chart.js';
+import BotaoHome from "@/components/BotaoHome/BotaoHome";
 
 interface FormData {
   eletrodomesticosPrincipais: string;
@@ -338,6 +339,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      <BotaoHome />
     </div>
   );
 }

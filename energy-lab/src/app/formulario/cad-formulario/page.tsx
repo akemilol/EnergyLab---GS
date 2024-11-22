@@ -3,6 +3,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { FiHome, FiMapPin, FiBox, FiUsers, FiSun, FiTv } from "react-icons/fi";
+import BotaoHome from "@/components/BotaoHome/BotaoHome";
 
 interface FormData {
   eletrodomesticosPrincipais: string;
@@ -18,6 +19,8 @@ interface FormData {
   energiaRenovavel: string;
 }
 
+
+// Pagina de cadastro do formulário
 export default function FormularioEnergia() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
@@ -282,6 +285,7 @@ export default function FormularioEnergia() {
           </button>
         </form>
       </div>
+      <BotaoHome />
     </div>
   );
 }

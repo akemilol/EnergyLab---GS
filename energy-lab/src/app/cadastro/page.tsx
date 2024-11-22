@@ -1,11 +1,11 @@
 import MenuCadastro from '@/components/MenuCadastro/MenuCadastro';
-import Voltar from "@/components/Voltar/Voltar";
+import BotaoHome from "@/components/BotaoHome/BotaoHome";
 
 export default function Cadastro() {
     return (
         <div>
             <MenuCadastro />
-            <Voltar />
+            <BotaoHome />
         </div>
     );
 }

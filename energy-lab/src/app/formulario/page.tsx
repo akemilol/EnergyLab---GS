@@ -1,5 +1,6 @@
 "use client";
 
+import BotaoHome from "@/components/BotaoHome/BotaoHome";
 import { useRouter } from "next/navigation";
 import { FiUserPlus, FiGrid } from "react-icons/fi";
 
@@ -24,7 +25,7 @@ export default function FormularioIndex() {
             className="w-full flex items-center justify-center gap-3 bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 rounded-lg transition duration-300"
           >
             <FiUserPlus size={20} />
-            Ir para Cadastro
+            Ir para Formulário
           </button>
 
           <button
@@ -36,6 +37,7 @@ export default function FormularioIndex() {
           </button>
         </div>
       </div>
+      <BotaoHome />
     </div>
   );
 }

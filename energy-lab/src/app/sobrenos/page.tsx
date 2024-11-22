@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar/NavBar";
 import CardAbout from "@/components/CardAbout/CardAbout"
 import FigmaBotão from "@/components/FigmaBotao/FigmaBotao";
+import BotaoHome from "@/components/BotaoHome/BotaoHome";
 
 export default function Sobrenos() {
     return (
@@ -11,6 +12,7 @@ export default function Sobrenos() {
         </h1>
         <CardAbout />
         <FigmaBotão />
+        <BotaoHome />
         </div>
     );
 };

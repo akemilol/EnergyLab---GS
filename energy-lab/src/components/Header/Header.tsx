@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+// Primeira pagina da Landing Page
 export default function Header() {
     return (
         <header

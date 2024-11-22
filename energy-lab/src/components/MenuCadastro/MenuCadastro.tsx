@@ -1,6 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { cadastrarUsuario } from '../../api/route';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+
+interface CadastroUsuario {
+    nomeCompleto: string;
+    dataNascimento: string;
+    email: string;
+    numeroTelefone: string;
+    senha: string;
+    confirmarSenha: string;
+    genero: string;
+}
 
 interface Erros {
     nome?: string;
@@ -10,6 +22,7 @@ interface Erros {
     senha?: string;
     confirmarSenha?: string;
     genero?: string;
+    global?: string;
 }
 
 export default function MenuCadastro() {
@@ -21,16 +34,59 @@ export default function MenuCadastro() {
     const [confirmarSenha, setConfirmarSenha] = useState<string>('');
     const [genero, setGenero] = useState<string>('');
     const [erros, setErros] = useState<Erros>({});
+    const [loading, setLoading] = useState<boolean>(false);
+    const [success, setSuccess] = useState<boolean>(false);
 
-    const validarFormulario = () => {
+    const validarData = (data: string): boolean => {
+        if (!data || !/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+            return false;
+        }
+
+        const [dia, mes, ano] = data.split('/').map(Number);
+        
+        if (isNaN(dia) || isNaN(mes) || isNaN(ano)) {
+            return false;
+        }
+
+        const dataObj = new Date(ano, mes - 1, dia);
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+        const idadeMinima = new Date();
+        idadeMinima.setFullYear(hoje.getFullYear() - 120);
+        idadeMinima.setHours(0, 0, 0, 0);
+
+        return (
+            dataObj.getFullYear() === ano &&
+            dataObj.getMonth() === mes - 1 &&
+            dataObj.getDate() === dia &&
+            dataObj >= idadeMinima &&
+            dataObj <= hoje &&
+            ano >= 1900
+        );
+    };
+
+    const formatarDataParaAPI = (data: string): string => {
+        try {
+            if (!data || !/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+                throw new Error('Data inválida');
+            }
+            return data.replace(/\//g, '-');
+        } catch (error) {
+            throw new Error('Erro ao formatar a data');
+        }
+    };
+
+    const validarFormulario = (): boolean => {
         const novosErros: Erros = {};
 
         if (!nome.trim()) {
             novosErros.nome = 'Por favor, preencha o nome completo.';
         }
 
-        if (!dataNascimento.trim() || !/^\d{2}\/\d{2}\/\d{4}$/.test(dataNascimento)) {
-            novosErros.dataNascimento = 'Por favor, preencha a data de nascimento no formato correto (dd/mm/yyyy).';
+        if (!dataNascimento.trim()) {
+            novosErros.dataNascimento = 'Por favor, preencha a data de nascimento.';
+        } else if (!validarData(dataNascimento)) {
+            novosErros.dataNascimento = 'Por favor, insira uma data de nascimento válida no formato dd/mm/aaaa.';
         }
 
         if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -61,32 +117,85 @@ export default function MenuCadastro() {
         return Object.keys(novosErros).length === 0;
     };
 
-    const handleCadastro = () => {
-        if (validarFormulario()) {
-            window.location.href = '/formulario';
-        }
-    };
-
     const handleDataNascimentoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/\D/g, '');
-        let formattedValue = value;
-        if (value.length >= 3 && value.length <= 4) {
-            formattedValue = `${value.slice(0, 2)}/${value.slice(2)}`;
-        } else if (value.length > 4) {
-            formattedValue = `${value.slice(0, 2)}/${value.slice(2, 4)}/${value.slice(4, 8)}`;
+        let value = e.target.value.replace(/\D/g, '');
+
+        if (value.length > 8) {
+            value = value.slice(0, 8);
         }
-        setDataNascimento(formattedValue);
+
+        if (value.length >= 2) {
+            value = value.slice(0, 2) + (value.length > 2 ? '/' + value.slice(2) : '');
+        }
+        if (value.length >= 5) {
+            value = value.slice(0, 5) + (value.length > 5 ? '/' + value.slice(5) : '');
+        }
+
+        setDataNascimento(value);
     };
 
     const handleTelefoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/\D/g, '');
         let formattedValue = value;
-        if (value.length > 2 && value.length <= 7) {
-            formattedValue = `(${value.slice(0, 2)}) ${value.slice(2)}`;
-        } else if (value.length > 7) {
-            formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7, 11)}`;
+
+        if (value.length > 11) {
+            formattedValue = value.slice(0, 11);
         }
+
+        if (value.length > 2) {
+            formattedValue = `(${value.slice(0, 2)})${value.length > 2 ? ' ' + value.slice(2) : ''}`;
+        }
+        if (value.length > 7) {
+            formattedValue = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+        }
+
         setTelefone(formattedValue);
+    };
+
+    const handleCadastro = async () => {
+        if (validarFormulario()) {
+            setLoading(true);
+            setSuccess(false);
+            try {
+                let dataFormatada;
+                try {
+                    dataFormatada = formatarDataParaAPI(dataNascimento);
+                } catch (error) {
+                    setErros({
+                        ...erros,
+                        dataNascimento: 'Formato de data inválido. Use dd/mm/aaaa.'
+                    });
+                    return;
+                }
+
+                const dadosCadastro: CadastroUsuario = {
+                    nomeCompleto: nome.trim(),
+                    dataNascimento: dataFormatada,
+                    email: email.trim().toLowerCase(),
+                    numeroTelefone: telefone.replace(/\D/g, ""),
+                    senha: senha,
+                    confirmarSenha: confirmarSenha,
+                    genero: genero.charAt(0).toUpperCase() + genero.slice(1).toLowerCase(),
+                };
+
+                const response = await cadastrarUsuario(dadosCadastro);
+                if (response.ok) {
+                    setSuccess(true);
+                    setTimeout(() => {
+                        window.location.href = "/formulario";
+                    }, 2000);
+                }
+                
+            } catch (error) {
+                console.error("Erro ao realizar o cadastro:", error);
+                setErros({
+                    ...erros,
+                    global: error instanceof Error ? error.message : "Erro ao realizar o cadastro. Por favor, tente novamente."
+                });
+            } finally {
+                setLoading(false);
+            }
+        }
     };
 
     return (
@@ -113,7 +222,8 @@ export default function MenuCadastro() {
                             type="text"
                             value={dataNascimento}
                             onChange={handleDataNascimentoChange}
-                            placeholder="dd/mm/yyyy"
+                            placeholder="dd/mm/aaaa"
+                            maxLength={10}
                             className="w-full px-6 py-4 bg-gray-800/50 text-gray-200 rounded-lg border border-gray-700 focus:outline-none focus:border-purple-500"
                         />
                         {erros.dataNascimento && <p className="text-red-500 text-sm mt-1">{erros.dataNascimento}</p>}
@@ -132,12 +242,13 @@ export default function MenuCadastro() {
                     </div>
 
                     <div>
-                        <label className="block text-white text-base mb-2">Numero de telefone:</label>
+                        <label className="block text-white text-base mb-2">Número de telefone:</label>
                         <input
                             type="text"
                             value={telefone}
                             onChange={handleTelefoneChange}
                             placeholder="(00) 00000-0000"
+                            maxLength={15}
                             className="w-full px-6 py-4 bg-gray-800/50 text-gray-200 rounded-lg border border-gray-700 focus:outline-none focus:border-purple-500"
                         />
                         {erros.telefone && <p className="text-red-500 text-sm mt-1">{erros.telefone}</p>}
@@ -170,8 +281,12 @@ export default function MenuCadastro() {
 
                 <div className="mb-6">
                     <label className="block text-white text-base mb-2">Gênero:</label>
-                    <select value={genero} onChange={(e) => setGenero(e.target.value)} className="w-full px-6 py-4 bg-gray-800/50 text-gray-200 rounded-lg border border-gray-700 focus:outline-none focus:border-purple-500 focus:bg-gray-800">
-                        <option value="" disabled hidden>Gênero</option>
+                    <select
+                        value={genero}
+                        onChange={(e) => setGenero(e.target.value)}
+                        className="w-full px-6 py-4 bg-gray-800/50 text-gray-200 rounded-lg border border-gray-700 focus:outline-none focus:border-purple-500 focus:bg-gray-800"
+                    >
+                        <option value="" disabled hidden>Selecione o gênero</option>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
                         <option value="outro">Outro</option>
@@ -181,10 +296,14 @@ export default function MenuCadastro() {
 
                 <button
                     onClick={handleCadastro}
-                    className="w-full py-4 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-500 transition duration-300"
+                    className="w-full py-4 bg-purple-600 text-white font-bold rounded-lg hover:bg-purple-500 transition duration-300 flex items-center justify-center"
+                    disabled={loading}
                 >
-                    Entrar
+                    {loading ? <AiOutlineLoading3Quarters className="animate-spin" size={24} /> : 'Cadastrar'}
                 </button>
+
+                {success && <p className="text-green-500 text-sm mt-4 text-center">Cadastro realizado com sucesso! Redirecionando...</p>}
+                {erros.global && <p className="text-red-500 text-sm mt-4 text-center">{erros.global}</p>}
             </div>
         </div>
     );

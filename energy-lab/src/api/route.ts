@@ -1,4 +1,3 @@
-// route.ts
 
 interface CadastroUsuario {
     nomeCompleto: string;
@@ -15,7 +14,7 @@ interface LoginUsuario {
     senha: string;
 }
 
-interface ApiResponse<T = any> {
+interface ApiResponse<T = unknown> {
     data?: T;
     message?: string;
     error?: string;
@@ -40,7 +39,6 @@ const handleApiResponse = async <T>(response: Response): Promise<ApiResponse<T>>
         const errorMessage = isJson 
             ? (await response.json()).message 
             : await response.text();
-
         throw new ApiError(response.status, errorMessage);
     }
 
@@ -59,8 +57,7 @@ const handleApiResponse = async <T>(response: Response): Promise<ApiResponse<T>>
     };
 };
 
-// Cadastra um novo usuário
-export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<ApiResponse> => {
+export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<ApiResponse<unknown>> => {
     try {
         const response = await fetch("/api/cadastrar", {
             method: "POST",
@@ -86,8 +83,7 @@ export const cadastrarUsuario = async (dadosCadastro: CadastroUsuario): Promise<
     }
 };
 
-// Realiza login do usuário
-export const loginUsuario = async (dadosLogin: LoginUsuario): Promise<ApiResponse> => {
+export const loginUsuario = async (dadosLogin: LoginUsuario): Promise<ApiResponse<unknown>> => {
     try {
         const response = await fetch("/api/login", {
             method: "POST",
@@ -113,8 +109,7 @@ export const loginUsuario = async (dadosLogin: LoginUsuario): Promise<ApiRespons
     }
 };
 
-// Atualiza dados do usuário
-export const atualizarUsuario = async (email: string, dadosUsuario: Partial<CadastroUsuario>): Promise<ApiResponse> => {
+export const atualizarUsuario = async (email: string, dadosUsuario: Partial<CadastroUsuario>): Promise<ApiResponse<unknown>> => {
     try {
         const response = await fetch(`/api/usuarios/${email}`, {
             method: "PUT",
@@ -141,8 +136,7 @@ export const atualizarUsuario = async (email: string, dadosUsuario: Partial<Cada
     }
 };
 
-// Deleta um usuário pelo email
-export const deletarUsuario = async (email: string): Promise<ApiResponse> => {
+export const deletarUsuario = async (email: string): Promise<ApiResponse<unknown>> => {
     try {
         const response = await fetch(`/api/usuarios/${email}`, {
             method: "DELETE",
@@ -168,8 +162,7 @@ export const deletarUsuario = async (email: string): Promise<ApiResponse> => {
     }
 };
 
-// Busca um usuário pelo email
-export const buscarUsuarioPorEmail = async (email: string): Promise<ApiResponse> => {
+export const buscarUsuarioPorEmail = async (email: string): Promise<ApiResponse<unknown>> => {
     try {
         const response = await fetch(`/api/usuarios/${email}`, {
             method: "GET",

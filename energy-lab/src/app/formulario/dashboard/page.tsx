@@ -181,7 +181,7 @@ export default function Dashboard() {
           "Microondas": 12,
         };
 
-        const eletrodomesticosSelecionados = Object.entries(formData.principaisEletrodomesticos).filter(([_, value]) => value !== "não tenho");
+        const eletrodomesticosSelecionados = Object.entries(formData.principaisEletrodomesticos).filter(([, value]) => value !== "não tenho");
         const labels = eletrodomesticosSelecionados.map(([key]) => key);
         const data = eletrodomesticosSelecionados.map(([key, value]) => {
           const quantidade = value === "3 ou mais" ? 3 : parseInt(value);

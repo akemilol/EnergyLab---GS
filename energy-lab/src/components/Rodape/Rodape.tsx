@@ -9,13 +9,13 @@ const Rodape = () => {
         className="bg-gradient-header text-white py-8 px-6 md:px-12 rounded-t-lg border-t-4 border-black w-full flex flex-col items-center space-y-4 max-w-[113rem] mx-auto">
 
         <nav className="flex space-x-8">
-          <Link href="#" className="hover:underline">
+          <Link href="#navbar" className="hover:underline">
             Home
           </Link>
           <Link href="/quiz" className="hover:underline">
             Quiz
           </Link>
-          <Link href="sobrenos" className="hover:underline">
+          <Link href="/sobrenos" className="hover:underline">
             Sobre nós
           </Link>
         </nav>

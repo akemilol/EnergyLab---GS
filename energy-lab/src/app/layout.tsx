@@ -1,3 +1,4 @@
+
 import './globals.css';
 
 export const metadata = {
@@ -15,7 +16,9 @@ export default function RootLayout({
             <head>
                 <link rel="icon" href="/img/icone.png" />
             </head>
-            <body>{children}</body>
+            <body>
+                {children}
+            </body>
         </html>
     );
 }

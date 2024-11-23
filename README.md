@@ -18,7 +18,7 @@
 ---
 
 ### 🎥 Pitch
-- [Acesso ao Pitch]()  
+- [Acesso ao Pitch](https://youtu.be/dZtyGASHTh0)  
 
 ---
 
